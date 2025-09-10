@@ -1,5 +1,11 @@
+import MoviesModule from "@/modules/movies";
+
 const Home = () => {
-  return <div>H</div>;
+  return (
+    <div>
+      <MoviesModule />
+    </div>
+  );
 };
 
 export default Home;
