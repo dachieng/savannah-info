@@ -31,7 +31,7 @@ export async function POST(req: Request) {
   const token = await signToken({
     sub: user.id,
     email: user.email,
-    name: user.name,
+    name: user.name || "",
   });
 
   // IMPORTANT: set cookie on the response you return
