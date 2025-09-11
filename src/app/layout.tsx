@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import Header from "@/components/ui/Header";
+import { Toaster } from "@/components/ui/Toaster";
 
 import "./globals.css";
 import QueryProvider from "@/providers/QueryProvider";
@@ -33,6 +34,12 @@ export default function RootLayout({
       >
         <QueryProvider>
           <Header />
+          <Toaster
+            closeButton
+            duration={10_000}
+            position="top-right"
+            richColors
+          />
           {children}
         </QueryProvider>
       </body>

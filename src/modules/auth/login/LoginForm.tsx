@@ -1,3 +1,10 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import { Loader } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+
 import { Button } from "@/components/ui/Button";
 import {
   Form,
@@ -9,8 +16,7 @@ import {
 } from "@/components/ui/Form";
 import { Input } from "@/components/ui/Input";
 import { loginSchema, LoginSchema } from "@/lib/schemas/auth";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { loginUser } from "@/services/auth.service";
 
 const defaultValues = {
   email: "",
@@ -18,9 +24,21 @@ const defaultValues = {
 };
 
 const LoginForm = () => {
+  const router = useRouter();
   const form = useForm<LoginSchema>({
     defaultValues,
     resolver: zodResolver(loginSchema),
+  });
+
+  const loginUserMutation = useMutation({
+    mutationFn: (data: LoginSchema) => loginUser(data),
+    onSuccess: () => {
+      toast.success("User logged in successfully");
+      router.push("/");
+    },
+    onError: (err) => {
+      toast.error(err.message);
+    },
   });
 
   const onSubmit = (data: LoginSchema) => {
@@ -65,9 +83,9 @@ const LoginForm = () => {
             type="submit"
             variant="primary"
           >
-            {/* {requestOtp.isPending || isPending ? (
-                <Loader className="mx-1 animate-spin" />
-              ) : null} */}
+            {loginUserMutation.isPending ? (
+              <Loader className="mx-1 animate-spin" />
+            ) : null}
             Sign up
           </Button>
         </div>

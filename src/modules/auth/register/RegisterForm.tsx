@@ -1,7 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
+import { useForm } from "react-hook-form";
 
 import { SignUpSchema, signupSchema } from "@/lib/schemas/auth";
-import { useForm } from "react-hook-form";
 import {
   Form,
   FormControl,
@@ -12,8 +15,8 @@ import {
 } from "@/components/ui/Form";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
-import { useMutation } from "@tanstack/react-query";
 import { registerUser } from "@/services/auth.service";
+import { Loader } from "lucide-react";
 
 const defaultValues = {
   email: "",
@@ -22,6 +25,7 @@ const defaultValues = {
 };
 
 const RegisterForm = () => {
+  const router = useRouter();
   const form = useForm<SignUpSchema>({
     defaultValues,
     resolver: zodResolver(signupSchema),
@@ -30,10 +34,11 @@ const RegisterForm = () => {
   const registerUserMutation = useMutation({
     mutationFn: (data: SignUpSchema) => registerUser(data),
     onSuccess: () => {
-      console.log("success");
+      toast.success("User created successfully");
+      router.push("/login");
     },
-    onError: () => {
-      console.log("error");
+    onError: (err) => {
+      toast.error(err.message);
     },
   });
 
@@ -93,9 +98,9 @@ const RegisterForm = () => {
               type="submit"
               variant="primary"
             >
-              {/* {requestOtp.isPending || isPending ? (
+              {registerUserMutation.isPending ? (
                 <Loader className="mx-1 animate-spin" />
-              ) : null} */}
+              ) : null}
               Sign up
             </Button>
           </div>
