@@ -1,12 +1,13 @@
 "use client";
 
+import AuthWrapper from "@/modules/auth/AuthWrapper";
 import LoginForm from "./LoginForm";
 
 const LoginModule = () => {
   return (
-    <div>
+    <AuthWrapper isLogin>
       <LoginForm />
-    </div>
+    </AuthWrapper>
   );
 };
 

@@ -1,8 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
+import { Eye, EyeOff, Loader } from "lucide-react";
 
 import { SignUpSchema, signupSchema } from "@/lib/schemas/auth";
 import {
@@ -16,7 +18,6 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { registerUser } from "@/services/auth.service";
-import { Loader } from "lucide-react";
 
 const defaultValues = {
   email: "",
@@ -26,10 +27,15 @@ const defaultValues = {
 
 const RegisterForm = () => {
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
   const form = useForm<SignUpSchema>({
     defaultValues,
     resolver: zodResolver(signupSchema),
   });
+
+  const togglePassword = () => {
+    setShowPassword((prev) => !prev);
+  };
 
   const registerUserMutation = useMutation({
     mutationFn: (data: SignUpSchema) => registerUser(data),
@@ -49,7 +55,7 @@ const RegisterForm = () => {
   return (
     <div>
       <Form {...form}>
-        <form className="pt-4" onSubmit={form.handleSubmit(onSubmit)}>
+        <form className="pt-4 space-y-3" onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
             control={form.control}
             name="email"
@@ -84,7 +90,24 @@ const RegisterForm = () => {
               <FormItem>
                 <FormLabel className="">Password</FormLabel>
                 <FormControl onClick={() => form.clearErrors("password")}>
-                  <Input placeholder="Enter password" {...field} />
+                  <Input
+                    placeholder="Enter password"
+                    type={showPassword ? "text" : "password"}
+                    {...field}
+                    endIcon={
+                      showPassword ? (
+                        <EyeOff
+                          className="h-10 w-10 p-3 text-secondary-dark cursor-pointer"
+                          onClick={togglePassword}
+                        />
+                      ) : (
+                        <Eye
+                          className="h-10 w-10 p-3 text-secondary-dark cursor-pointer"
+                          onClick={togglePassword}
+                        />
+                      )
+                    }
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

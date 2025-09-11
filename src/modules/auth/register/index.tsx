@@ -1,12 +1,13 @@
 "use client";
 
+import AuthWrapper from "@/modules/auth/AuthWrapper";
 import RegisterForm from "./RegisterForm";
 
 const RegisterModule = () => {
   return (
-    <div>
+    <AuthWrapper>
       <RegisterForm />
-    </div>
+    </AuthWrapper>
   );
 };
 
