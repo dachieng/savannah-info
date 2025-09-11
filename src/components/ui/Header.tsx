@@ -10,6 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/DropdownMenu";
+import { Avatar, AvatarFallback, AvatarImage } from "./Avatar";
 
 const Header = () => {
   return (
@@ -23,14 +24,16 @@ const Header = () => {
         </div>
 
         <div className="flex items-center space-x-4">
-          <Button variant={"primary"}>Get Started</Button>
+          <Button variant={"primary"} size={"sm"}>
+            Get Started
+          </Button>
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="rounded-full">
-                <User className="h-5 w-5" />
-                <span className="sr-only">Profile menu</span>
-              </Button>
+              <Avatar className="cursor-pointer">
+                <AvatarImage src="/avatar.jpg" alt="User avatar" />
+                <AvatarFallback>AN</AvatarFallback>
+              </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
               <DropdownMenuItem>
