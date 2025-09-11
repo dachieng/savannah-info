@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/Toaster";
 
 import "./globals.css";
 import QueryProvider from "@/providers/QueryProvider";
+import SessionProvider from "@/providers/SessionProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,16 +33,18 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <QueryProvider>
-          <Header />
-          <Toaster
-            closeButton
-            duration={10_000}
-            position="top-right"
-            richColors
-          />
-          {children}
-        </QueryProvider>
+        <SessionProvider>
+          <QueryProvider>
+            <Header />
+            <Toaster
+              closeButton
+              duration={10_000}
+              position="top-right"
+              richColors
+            />
+            {children}
+          </QueryProvider>
+        </SessionProvider>
       </body>
     </html>
   );

@@ -10,3 +10,9 @@ export interface IUser {
   name: string;
   passwordHash: string;
 }
+
+export interface ISession {
+  id: string;
+  email: string;
+  name: string;
+}

@@ -40,7 +40,7 @@ const LoginForm = () => {
     mutationFn: (data: LoginSchema) => loginUser(data),
     onSuccess: () => {
       toast.success("User logged in successfully");
-      router.push("/");
+      router.push("/movies");
     },
     onError: (err) => {
       toast.error(err.message);
@@ -48,7 +48,7 @@ const LoginForm = () => {
   });
 
   const onSubmit = (data: LoginSchema) => {
-    console.log(data);
+    loginUserMutation.mutate(data);
   };
 
   return (

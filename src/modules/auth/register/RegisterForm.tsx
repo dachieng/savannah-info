@@ -41,7 +41,7 @@ const RegisterForm = () => {
     mutationFn: (data: SignUpSchema) => registerUser(data),
     onSuccess: () => {
       toast.success("User created successfully");
-      router.push("/login");
+      router.push("/movies");
     },
     onError: (err) => {
       toast.error(err.message);
