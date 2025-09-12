@@ -11,10 +11,18 @@ export const PUBLIC_PATHS = [
   "/public",
 ];
 
-export const PaginationNoDataResponse = {
+export const TMDBNoDataResponse = {
   results: [],
   page: 1,
   hasNext: false,
   total_pages: 1,
   total_results: 0,
+};
+
+export const formatReleaseYear = (releaseDate: string) => {
+  return new Date(releaseDate).getFullYear();
+};
+
+export const formatRating = (rating: number) => {
+  return Math.round(rating * 10) / 10;
 };
