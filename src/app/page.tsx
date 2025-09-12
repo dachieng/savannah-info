@@ -1,9 +1,9 @@
-import MoviesModule from "@/modules/movies";
+import Hero from "@/modules/home";
 
 const Home = () => {
   return (
     <div>
-      <MoviesModule />
+      <Hero />
     </div>
   );
 };

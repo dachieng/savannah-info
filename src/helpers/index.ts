@@ -10,3 +10,11 @@ export const PUBLIC_PATHS = [
   "/assets",
   "/public",
 ];
+
+export const PaginationNoDataResponse = {
+  results: [],
+  page: 1,
+  hasNext: false,
+  total_pages: 1,
+  total_results: 0,
+};
