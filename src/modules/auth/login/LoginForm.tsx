@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/Input";
 import { loginSchema, LoginSchema } from "@/lib/schemas/auth";
 import { loginUser } from "@/services/auth.service";
 import { useState } from "react";
+import { useSessionStore } from "@/hooks/useSession";
 
 const defaultValues = {
   email: "",
@@ -32,14 +33,17 @@ const LoginForm = () => {
     resolver: zodResolver(loginSchema),
   });
 
+  const { setSession } = useSessionStore();
+
   const togglePassword = () => {
     setShowPassword((prev) => !prev);
   };
 
   const loginUserMutation = useMutation({
     mutationFn: (data: LoginSchema) => loginUser(data),
-    onSuccess: () => {
+    onSuccess: ({ data }) => {
       toast.success("User logged in successfully");
+      setSession(data);
       router.push("/movies");
     },
     onError: (err) => {

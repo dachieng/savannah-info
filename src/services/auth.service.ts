@@ -8,6 +8,12 @@ const registerUser = async (data: SignUpSchema) => {
     },
     body: JSON.stringify(data),
   });
+
+  if (!response.ok) {
+    const err = await response.json().catch(() => ({}));
+    throw new Error(err.error || "Login failed");
+  }
+
   return response.json();
 };
 
@@ -19,6 +25,12 @@ const loginUser = async (data: SignUpSchema) => {
     },
     body: JSON.stringify(data),
   });
+
+  if (!response.ok) {
+    const err = await response.json().catch(() => ({}));
+    throw new Error(err.error || "Login failed");
+  }
+
   return response.json();
 };
 
