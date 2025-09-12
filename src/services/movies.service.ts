@@ -1,6 +1,11 @@
 import { GET } from "@/config";
 import { TMDBNoDataResponse } from "@/helpers";
-import { ITMDBListResponse, ITMDBMovie } from "@/lib/types/movies";
+import {
+  ITMDBCredits,
+  ITMDBListResponse,
+  ITMDBMovie,
+  ITMDBMovieDetail,
+} from "@/lib/types/movies";
 
 const getTopRatedMovies = async (
   page: number
@@ -56,4 +61,44 @@ const searchMovies = async (
   }
 };
 
-export { getTopRatedMovies, getPopularMovies, searchMovies };
+const getMovieDetails = async (
+  movieId: string
+): Promise<ITMDBMovieDetail | null> => {
+  try {
+    const res = await GET(`/movie/${movieId}`, {
+      params: {
+        language: "en-US",
+      },
+    });
+
+    return res?.data ?? null;
+  } catch (error) {
+    console.error("Error fetching movie details:", error);
+    return null;
+  }
+};
+
+const getMovieCredits = async (
+  movieId: string
+): Promise<ITMDBCredits | null> => {
+  try {
+    const res = await GET(`/movie/${movieId}/credits`, {
+      params: {
+        language: "en-US",
+      },
+    });
+
+    return res?.data ?? null;
+  } catch (error) {
+    console.error("Error fetching movie credits:", error);
+    return null;
+  }
+};
+
+export {
+  getTopRatedMovies,
+  getPopularMovies,
+  searchMovies,
+  getMovieCredits,
+  getMovieDetails,
+};

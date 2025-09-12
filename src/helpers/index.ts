@@ -26,3 +26,20 @@ export const formatReleaseYear = (releaseDate: string) => {
 export const formatRating = (rating: number) => {
   return Math.round(rating * 10) / 10;
 };
+
+export const formatRuntime = (runtime: number | null) => {
+  if (!runtime) return "Unknown";
+  const hours = Math.floor(runtime / 60);
+  const minutes = runtime % 60;
+  return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
+};
+
+export const formatCurrency = (amount: number) => {
+  if (amount === 0) return "Unknown";
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(amount);
+};

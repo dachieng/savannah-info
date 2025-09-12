@@ -1,6 +1,6 @@
 "use client";
 
-import { Play, Info, Volume2, VolumeX, Star } from "lucide-react";
+import { Play, Info, Volume2, VolumeX, Star, Film } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 
@@ -10,6 +10,7 @@ import Loading from "@/components/ui/Loader";
 import { formatReleaseYear, formatRating } from "@/helpers";
 import type { ITMDBMovie } from "@/lib/types/movies";
 import { getMovieImageUrl, getTopRatedMovies } from "@/services/movies.service";
+import Link from "next/link";
 
 const Hero = () => {
   const [isMuted, setIsMuted] = useState(true);
@@ -102,14 +103,26 @@ const Hero = () => {
               <Play className="h-6 w-6 fill-current" />
               <span>Play</span>
             </Button>
-            <Button
-              variant="secondary"
-              size="lg"
-              className="bg-gray-600/80 text-white hover:bg-gray-600/60 font-semibold px-8 py-3 text-lg flex items-center space-x-2 backdrop-blur-sm"
-            >
-              <Info className="h-6 w-6" />
-              <span>More Info</span>
-            </Button>
+            <Link href={`/movies/movie/${currentMovie.id}`}>
+              <Button
+                variant="secondary"
+                size="lg"
+                className="bg-gray-600/80 text-white hover:bg-gray-600/60 font-semibold px-8 py-3 text-lg flex items-center space-x-2 backdrop-blur-sm"
+              >
+                <Info className="h-6 w-6" />
+                <span>More Info</span>
+              </Button>
+            </Link>
+            <Link href="/movies">
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-white/30 text-white hover:bg-white/10 font-semibold px-8 py-3 text-lg flex items-center space-x-2 backdrop-blur-sm w-full bg-transparent"
+              >
+                <Film className="h-6 w-6" />
+                <span>Browse All Movies</span>
+              </Button>
+            </Link>
           </div>
 
           <div className="flex items-center space-x-4 text-sm text-gray-300">
