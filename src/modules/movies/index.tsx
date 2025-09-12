@@ -1,11 +1,12 @@
 "use client";
 
 import { Button } from "@/components/ui/Button";
+import MoviesGrid from "./components/MoviesGrid";
 
 const MoviesModule = () => {
   return (
     <div>
-      <Button variant={"success"}>Movies</Button>
+      <MoviesGrid />
     </div>
   );
 };

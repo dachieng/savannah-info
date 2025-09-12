@@ -23,12 +23,12 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full shadow-md bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex h-16 items-center justify-between px-4">
-        <div className="flex items-center space-x-2">
+        <Link href={"/"} className="flex items-center space-x-2">
           <Button size={"icon"} variant={"primary"}>
             <Film className="h-6 w-6" />
           </Button>
           <span className="text-xl font-bold text-foreground">TMDB</span>
-        </div>
+        </Link>
 
         <div className="flex items-center space-x-4">
           {loading ? (

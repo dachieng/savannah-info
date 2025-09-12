@@ -1,10 +1,12 @@
 "use client";
 
-import { Play, Info, Volume2, VolumeX } from "lucide-react";
+import { Play, Info, Volume2, VolumeX, Star } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { Button } from "@/components/ui/Button";
+import Loading from "@/components/ui/Loader";
+
 import { formatReleaseYear, formatRating } from "@/helpers";
 import type { ITMDBMovie } from "@/lib/types/movies";
 import { getMovieImageUrl, getTopRatedMovies } from "@/services/movies.service";
@@ -42,7 +44,7 @@ const Hero = () => {
   if (isLoading) {
     return (
       <section className="relative h-[calc(100vh-4rem)] w-full overflow-hidden bg-black flex items-center justify-center">
-        <div className="text-white text-xl">Loading movies...</div>
+        <Loading />
       </section>
     );
   }
@@ -114,8 +116,9 @@ const Hero = () => {
             <span className="bg-gray-800/80 px-2 py-1 rounded">
               {formatReleaseYear(currentMovie?.release_date ?? "")}
             </span>
-            <span className="bg-gray-800/80 px-2 py-1 rounded">
-              ⭐ {formatRating(currentMovie.vote_average)}
+            <span className="bg-gray-800/80 px-2 py-1 rounded flex justify-center items-center">
+              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400 mr-1" />
+              {formatRating(currentMovie.vote_average)}
             </span>
             <span className="bg-gray-800/80 px-2 py-1 rounded">HD</span>
             <div className="flex items-center space-x-1">
