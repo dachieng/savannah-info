@@ -47,7 +47,6 @@ const MovieDetailContent = () => {
   const movieDetails = detailsQ.data;
   const movieCredits = creditsQ.data;
 
-  // “Not found” handling in client: show a friendly 404 UI or navigate
   if (!isLoading && !isError && !movieDetails) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4">
@@ -101,7 +100,6 @@ const MovieDetailContent = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section with Backdrop */}
       <div className="relative h-[60vh] md:h-[70vh] overflow-hidden">
         <Image
           src={backdropUrl || "/movie-backdrop.png"}
@@ -113,7 +111,6 @@ const MovieDetailContent = () => {
 
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
 
-        {/* Back Button */}
         <div className="absolute top-6 left-6 z-10">
           <Link href="/movies">
             <Button
@@ -127,11 +124,9 @@ const MovieDetailContent = () => {
           </Link>
         </div>
 
-        {/* Movie Info Overlay */}
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row gap-6 md:gap-8">
-              {/* Poster */}
               <div className="flex-shrink-0">
                 <div className="w-48 md:w-64 aspect-[2/3] relative overflow-hidden rounded-lg shadow-2xl">
                   <Image
@@ -178,11 +173,7 @@ const MovieDetailContent = () => {
                 {/* Genres */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {movieDetails.genres.map((genre) => (
-                    <Badge
-                      key={genre.id}
-                      variant="primary"
-                      // className="bg-emerald-600/20 text-emerald-100 border-emerald-500/30"
-                    >
+                    <Badge key={genre.id} variant="primary">
                       {genre.name}
                     </Badge>
                   ))}
@@ -198,12 +189,9 @@ const MovieDetailContent = () => {
         </div>
       </div>
 
-      {/* Content Section */}
       <div className="max-w-7xl mx-auto px-6 md:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
-            {/* Cast */}
             {movieCredits?.cast && movieCredits.cast.length > 0 && (
               <Card>
                 <CardHeader>
@@ -216,9 +204,7 @@ const MovieDetailContent = () => {
             )}
           </div>
 
-          {/* Sidebar */}
           <div className="space-y-6">
-            {/* Movie Facts */}
             <Card>
               <CardHeader>
                 <CardTitle>Movie Facts</CardTitle>
