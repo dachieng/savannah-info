@@ -40,12 +40,18 @@ const RegisterForm = () => {
     setShowPassword((prev) => !prev);
   };
 
+  // Get the next parameter from the URL
+
   const registerUserMutation = useMutation({
     mutationFn: (data: SignUpSchema) => registerUser(data),
-    onSuccess: ({ data }) => {
-      toast.success("User created successfully");
+    onSuccess: async ({ data }) => {
       setSession(data);
-      router.push("/movies");
+
+      router.replace("/movies");
+
+      toast.success("User created successfully");
+
+      useSessionStore.getState().fetchMe().catch(console.error);
     },
     onError: (err) => {
       toast.error(err.message);

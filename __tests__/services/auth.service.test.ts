@@ -20,9 +20,12 @@ describe("Auth Service", () => {
 
     it("should register user successfully", async () => {
       const mockResponse = {
-        id: "1",
-        email: "test@example.com",
-        name: "Test User",
+        user: {
+          id: "1",
+          email: "test@example.com",
+          name: "Test User",
+        },
+        ok: true,
       };
 
       mockFetch.mockResolvedValueOnce({
@@ -37,9 +40,10 @@ describe("Auth Service", () => {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(mockSignUpData),
       });
-      expect(result).toEqual(mockResponse);
+      expect(result).toEqual({ data: mockResponse.user, ok: true });
     });
 
     it("should throw error when registration fails", async () => {
@@ -88,7 +92,7 @@ describe("Auth Service", () => {
           email: "test@example.com",
           name: "Test User",
         },
-        token: "jwt-token-here",
+        ok: true,
       };
 
       mockFetch.mockResolvedValueOnce({
@@ -103,9 +107,10 @@ describe("Auth Service", () => {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(mockLoginData),
       });
-      expect(result).toEqual(mockResponse);
+      expect(result).toEqual({ data: mockResponse.user, ok: true });
     });
 
     it("should throw error when login fails", async () => {

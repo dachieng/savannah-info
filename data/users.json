@@ -4,5 +4,11 @@
     "email": "oloodorcas99@gmail.com",
     "name": "dachieng",
     "passwordHash": "$2b$10$ZSY6Pa5UXPosDNoBJSAAoO4dWphMDH0ectKtnfpiV1HqpvzzxZT/i"
+  },
+  {
+    "id": "ff61949e-c5b0-4d3a-91cf-eebebe7a11b2",
+    "email": "janedoe@gmail.com",
+    "name": "janedoe",
+    "passwordHash": "$2b$10$x/KcUKrVWG1a9l.lKMWgE.VL5WswcdEGkCHkIWBR0pswfJw6XEJtG"
   }
 ]

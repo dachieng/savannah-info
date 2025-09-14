@@ -6,6 +6,7 @@ const registerUser = async (data: SignUpSchema) => {
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: "include",
     body: JSON.stringify(data),
   });
 
@@ -14,7 +15,8 @@ const registerUser = async (data: SignUpSchema) => {
     throw new Error(err.error || "Login failed");
   }
 
-  return response.json();
+  const result = await response.json();
+  return { data: result.user, ok: result.ok };
 };
 
 const loginUser = async (data: SignUpSchema) => {
