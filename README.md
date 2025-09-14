@@ -97,7 +97,7 @@ For detailed setup instructions, see [DEPLOY-SIMPLE.md](./DEPLOY-SIMPLE.md)
 ├── __tests__/               # Test files
 ├── data/                    # Mock data and user storage
 ├── public/                  # Static assets
-└── scripts/                 # Build and deployment scripts
+└── .github/deployments      # Build and deployment scripts
 ```
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
