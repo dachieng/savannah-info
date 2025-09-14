@@ -3,8 +3,8 @@ import type { NextRequest } from "next/server";
 import { jwtVerify } from "jose";
 
 import { PUBLIC_PATHS } from "@/helpers";
+import { COOKIE_NAME } from "./enums/auth";
 
-const COOKIE_NAME = "session";
 const secret = new TextEncoder().encode(process.env.JWT_SECRET || "dev_secret");
 
 const isPublicPath = (pathname: string) => {
@@ -16,7 +16,7 @@ export const middleware = async (req: NextRequest) => {
 
   if (isPublicPath(pathname)) return NextResponse.next();
 
-  const token = req.cookies.get(COOKIE_NAME)?.value;
+  const token = req.cookies.get(COOKIE_NAME.SESSION)?.value;
   if (!token) {
     const url = new URL("/login", req.url);
     url.searchParams.set("next", pathname);
