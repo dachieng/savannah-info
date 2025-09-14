@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { findUserByEmail, createUser } from "@/lib/db";
 import { promises as fs } from "fs";
-import path from "path";
 
 // Mock fs module
 jest.mock("fs", () => ({
