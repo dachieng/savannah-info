@@ -12,7 +12,7 @@ Click the button above to deploy your own copy to Vercel in one click!
 
 - 🎬 Movie browsing and search powered by TMDB API
 - 🔐 User authentication with JWT
-- 🎨 Modern UI with Tailwind CSS and Radix UI
+- 🎨 Modern UI with Tailwind CSS and Shadcn UI
 - 📱 Responsive design
 - 🧪 Comprehensive testing with Jest
 - 🚀 Automated deployment with Vercel
