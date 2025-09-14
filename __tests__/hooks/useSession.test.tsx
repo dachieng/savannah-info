@@ -1,11 +1,11 @@
-import { renderHook, act } from '@testing-library/react';
-import { useSessionStore } from '@/hooks/useSession';
+import { renderHook, act } from "@testing-library/react";
+import { useSessionStore } from "@/hooks/useSession";
 
 // Mock fetch globally
 global.fetch = jest.fn();
 const mockFetch = global.fetch as jest.MockedFunction<typeof fetch>;
 
-describe('useSession', () => {
+describe("useSession", () => {
   beforeEach(() => {
     jest.clearAllMocks();
     // Reset the store state
@@ -16,8 +16,8 @@ describe('useSession', () => {
     });
   });
 
-  describe('initial state', () => {
-    it('should have correct initial state', () => {
+  describe("initial state", () => {
+    it("should have correct initial state", () => {
       const { result } = renderHook(() => useSessionStore());
 
       expect(result.current.session).toBeNull();
@@ -26,13 +26,13 @@ describe('useSession', () => {
     });
   });
 
-  describe('setSession', () => {
-    it('should set session and clear error', () => {
+  describe("setSession", () => {
+    it("should set session and clear error", () => {
       const { result } = renderHook(() => useSessionStore());
       const mockSession = {
-        id: '1',
-        email: 'test@example.com',
-        name: 'Test User',
+        id: "1",
+        email: "test@example.com",
+        name: "Test User",
       };
 
       act(() => {
@@ -43,15 +43,15 @@ describe('useSession', () => {
       expect(result.current.error).toBeNull();
     });
 
-    it('should clear session when passed null', () => {
+    it("should clear session when passed null", () => {
       const { result } = renderHook(() => useSessionStore());
 
       // First set a session
       act(() => {
         result.current.setSession({
-          id: '1',
-          email: 'test@example.com',
-          name: 'Test User',
+          id: "1",
+          email: "test@example.com",
+          name: "Test User",
         });
       });
 
@@ -65,15 +65,15 @@ describe('useSession', () => {
     });
   });
 
-  describe('clearSession', () => {
-    it('should clear session and error', () => {
+  describe("clearSession", () => {
+    it("should clear session and error", () => {
       const { result } = renderHook(() => useSessionStore());
 
       // Set initial state with session and error
       act(() => {
         useSessionStore.setState({
-          session: { id: '1', email: 'test@example.com', name: 'Test User' },
-          error: 'Some error',
+          session: { id: "1", email: "test@example.com", name: "Test User" },
+          error: "Some error",
           loading: false,
         });
       });
@@ -87,12 +87,12 @@ describe('useSession', () => {
     });
   });
 
-  describe('fetchMe', () => {
-    it('should fetch user session successfully', async () => {
+  describe("fetchMe", () => {
+    it("should fetch user session successfully", async () => {
       const mockUser = {
-        id: '1',
-        email: 'test@example.com',
-        name: 'Test User',
+        id: "1",
+        email: "test@example.com",
+        name: "Test User",
       };
 
       mockFetch.mockResolvedValueOnce({
@@ -106,15 +106,15 @@ describe('useSession', () => {
         await result.current.fetchMe();
       });
 
-      expect(mockFetch).toHaveBeenCalledWith('/api/auth/me', {
-        cache: 'no-store',
+      expect(mockFetch).toHaveBeenCalledWith("/api/auth/me", {
+        cache: "no-store",
       });
       expect(result.current.session).toEqual(mockUser);
       expect(result.current.loading).toBe(false);
       expect(result.current.error).toBeNull();
     });
 
-    it('should clear session when API returns not ok', async () => {
+    it("should clear session when API returns not ok", async () => {
       mockFetch.mockResolvedValueOnce({
         ok: false,
       } as any);
@@ -130,9 +130,9 @@ describe('useSession', () => {
       expect(result.current.error).toBeNull();
     });
 
-    it('should handle fetch errors', async () => {
-      const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
-      mockFetch.mockRejectedValueOnce(new Error('Network error'));
+    it("should handle fetch errors", async () => {
+      const consoleSpy = jest.spyOn(console, "error").mockImplementation();
+      mockFetch.mockRejectedValueOnce(new Error("Network error"));
 
       const { result } = renderHook(() => useSessionStore());
 
@@ -142,15 +142,15 @@ describe('useSession', () => {
 
       expect(result.current.session).toBeNull();
       expect(result.current.loading).toBe(false);
-      expect(result.current.error).toBe('Failed to load session');
+      expect(result.current.error).toBe("Failed to load session");
       expect(consoleSpy).toHaveBeenCalled();
 
       consoleSpy.mockRestore();
     });
 
-    it('should set loading state during fetch', async () => {
+    it("should set loading state during fetch", async () => {
       let resolvePromise: (value: any) => void;
-      const fetchPromise = new Promise(resolve => {
+      const fetchPromise = new Promise((resolve) => {
         resolvePromise = resolve;
       });
 
@@ -171,7 +171,7 @@ describe('useSession', () => {
         ok: true,
         json: () =>
           Promise.resolve({
-            user: { id: '1', email: 'test@example.com', name: 'Test' },
+            user: { id: "1", email: "test@example.com", name: "Test" },
           }),
       });
 
