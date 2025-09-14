@@ -6,9 +6,10 @@ export const PUBLIC_PATHS = [
   "/api/auth/logout",
   "/api/auth/me",
   "/_next",
-  "/favicon",
+  "/favicon.ico",
   "/assets",
   "/public",
+  "/", // Allow access to home page
 ];
 
 export const TMDBNoDataResponse = {

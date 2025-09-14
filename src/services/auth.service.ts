@@ -24,6 +24,7 @@ const loginUser = async (data: SignUpSchema) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
+    credentials: "include", // Important: include credentials for cookies
   });
 
   if (!response.ok) {
@@ -31,7 +32,8 @@ const loginUser = async (data: SignUpSchema) => {
     throw new Error(err.error || "Login failed");
   }
 
-  return response.json();
+  const result = await response.json();
+  return { data: result.user, ok: result.ok };
 };
 
 export { registerUser, loginUser };

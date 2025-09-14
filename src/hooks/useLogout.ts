@@ -9,11 +9,20 @@ export function useLogout() {
 
   return async function logout() {
     try {
-      await fetch("/api/auth/logout", { method: "POST" });
-    } finally {
+      const response = await fetch("/api/auth/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+
+      if (response.ok) {
+        clearSession();
+        router.replace("/login");
+      }
+    } catch (error) {
+      console.error("Logout failed:", error);
+      // Still clear the session on the client side
       clearSession();
       router.replace("/login");
-      router.refresh();
     }
   };
 }

@@ -41,10 +41,15 @@ const LoginForm = () => {
 
   const loginUserMutation = useMutation({
     mutationFn: (data: LoginSchema) => loginUser(data),
-    onSuccess: ({ data }) => {
-      toast.success("User logged in successfully");
+    onSuccess: async ({ data }) => {
       setSession(data);
-      router.push("/movies");
+      toast.success("User logged in successfully");
+
+      // Force a session refresh
+      await useSessionStore.getState().fetchMe();
+
+      // Use replace instead of push to prevent back navigation to login
+      router.replace("/movies");
     },
     onError: (err) => {
       toast.error(err.message);

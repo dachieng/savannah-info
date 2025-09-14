@@ -36,10 +36,13 @@ export const middleware = async (req: NextRequest) => {
 export const config = {
   matcher: [
     /*
-      Protect everything except:
-      - static files, _next, images
-      - explicit public paths above
-    */
-    "/((?!_next/static|_next/image|favicon.ico|images|public).*)",
+     * Match all request paths except for the ones starting with:
+     * - api/auth (auth API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * - public (public files)
+     */
+    "/((?!api/auth|_next/static|_next/image|favicon.ico|public).*)",
   ],
 };

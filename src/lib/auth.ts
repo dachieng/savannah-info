@@ -51,13 +51,14 @@ export const clearSessionCookie = async () => {
 };
 
 export const getSession = async () => {
-  const cookieStore = await cookies();
-  const cookie = cookieStore.get(COOKIE_NAME.SESSION)?.value;
-  if (!cookie) return null;
   try {
-    const payload = await verifyToken(cookie);
-    return payload as JWTPayload;
-  } catch {
+    const cookieStore = await cookies();
+    const token = cookieStore.get(COOKIE_NAME.SESSION)?.value;
+    if (!token) return null;
+    const verified = await verifyToken(token);
+    return verified;
+  } catch (error) {
+    console.error("Error getting session:", error);
     return null;
   }
 };

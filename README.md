@@ -107,7 +107,7 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 - **Framework**: [Next.js 15](https://nextjs.org/)
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **UI Components**: [Radix UI](https://www.radix-ui.com/)
+- **UI Components**: [Shadcn UI](https://ui.shadcn.com/docs)
 - **State Management**: [Zustand](https://zustand-demo.pmnd.rs/)
 - **Data Fetching**: [TanStack Query](https://tanstack.com/query)
 - **Testing**: [Jest](https://jestjs.io/) + [React Testing Library](https://testing-library.com/)
