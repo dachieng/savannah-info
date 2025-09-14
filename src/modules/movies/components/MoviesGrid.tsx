@@ -125,7 +125,7 @@ const MoviesGrid = () => {
             )}
             {!hasNextPage && movies.length > 0 && (
               <p className="text-muted-foreground">
-                You've reached the end! Found {movies.length} movies.
+                You&apos;ve reached the end! Found {movies.length} movies.
               </p>
             )}
           </div>

@@ -145,7 +145,7 @@ const MovieDetailContent = () => {
                 </h1>
                 {movieDetails.tagline && (
                   <p className="text-lg md:text-xl text-primary mb-4 italic text-pretty">
-                    "{movieDetails.tagline}"
+                    &quot;{movieDetails.tagline}&quot;
                   </p>
                 )}
 
